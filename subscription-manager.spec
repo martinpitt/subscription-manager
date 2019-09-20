@@ -32,7 +32,7 @@
 %bcond_without python2_rhsm
 %endif
 
-%if %{with python3}
+%if %{with python3} || 0%{?suse_version}
 %global use_subman_gui 0
 %else
 %global use_subman_gui 1
@@ -59,13 +59,13 @@
 %global gtk3 1
 %endif
 
-%if 0%{?rhel} == 6 || 0%{?suse_version}
+%if 0%{?rhel} == 6
 %global use_initial_setup 0
 %global use_firstboot 1
 %global use_inotify 0
 %endif
 
-%if %{use_subman_gui} || %{use_initial_setup} || %{use_firstboot}
+%if (%{use_subman_gui} || %{use_initial_setup} || %{use_firstboot}) && !0%{?suse_version}
 %global use_rhsm_gtk 1
 %else
 %global use_rhsm_gtk 0
@@ -365,6 +365,7 @@ Requires: %{?suse_version:dejavu} %{!?suse_version:dejavu-sans-fonts}
 %if !0%{?suse_version}
 Requires(post): scrollkeeper
 Requires(postun): scrollkeeper
+%else
 %endif
 
 %description -n rhsm-gtk

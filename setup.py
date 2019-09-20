@@ -92,7 +92,7 @@ class install(_install):
         ('rpm-version=', None, 'version and release of the RPM this is built for'),
         ('with-systemd=', None, 'whether to install w/ systemd support or not'),
         ('with-subman-gui=', None, 'whether to install subman GUI or not'),
-        ('with-cockpit-desktop-entry=', None, 'whether to install desktop entry for subman cockpit plugin or not')
+        ('with-cockpit-desktop-entry=', None, 'whether to install desktop entry for subman cockpit plugin or not'),
         ]
 
     def initialize_options(self):
@@ -172,7 +172,7 @@ class install_data(_install_data):
     user_options = _install_data.user_options + [
         ('with-systemd=', None, 'whether to install w/ systemd support or not'),
         ('with-subman-gui=', None, 'whether to install subman GUI or not'),
-        ('with-cockpit-desktop-entry=', None, 'whether to install desktop entry for subman cockpit plugin or not')
+        ('with-cockpit-desktop-entry=', None, 'whether to install desktop entry for subman cockpit plugin or not'),
         ]
 
     def initialize_options(self):

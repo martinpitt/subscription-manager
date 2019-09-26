@@ -168,6 +168,8 @@
 
 %global subpackages SUBPACKAGES="%{?include_syspurpose:syspurpose}"
 
+%global exclude_packages EXCLUDE_PACKAGES="%{!?use_rhsm_gtk:subscription_manager.gui,}%{!?use_container_plugin:*container*,}"
+
 Name: subscription-manager
 Version: 1.26.2
 Release: 1%{?dist}
@@ -661,7 +663,8 @@ make -f Makefile install VERSION=%{version}-%{release} \
     %{?with_subman_gui} \
     %{?with_cockpit} \
     %{?subpackages} \
-    %{?include_syspurpose:INCLUDE_SYSPURPOSE="1"}
+    %{?include_syspurpose:INCLUDE_SYSPURPOSE="1"} \
+    %{?exclude_packages}
 
 %if (%{use_dnf} && (0%{?fedora} >= 29 || 0%{?rhel} >= 8))
 pushd src/dnf-plugins/product-id

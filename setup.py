@@ -38,6 +38,11 @@ sys.path.append(build_ext_home)
 from build_ext import i18n, lint, template, utils
 
 
+# Read packages we should exclude from the environment
+# This is used to deal with the fact that we have multiple packages which
+# might be built optionally all tracked / installed via one setup.
+exclude_packages = [x.strip() for x in os.environ.get('EXCLUDE_PACKAGES', '').split(',') if x != '']
+
 # subclass build_py so we can generate
 # version.py based on either args passed
 # in (--rpm-version, --gtk-version) or
@@ -347,7 +352,7 @@ setup(
     author="Adrian Likins",
     author_email="alikins@redhat.com",
     cmdclass=cmdclass,
-    packages=find_packages('src', exclude=['subscription_manager.gui', 'subscription_manager.gui.firstboot.*', '*.ga_impls', '*.ga_impls.*', '*.plugin.ostree', '*.services.examples', 'syspurpose*']),
+    packages=find_packages('src', exclude=['subscription_manager.gui.firstboot.*', '*.ga_impls', '*.ga_impls.*', '*.plugin.ostree', '*.services.examples', 'syspurpose*'].extend(exclude_packages))
     package_dir={'': 'src'},
     package_data={
         'subscription_manager.gui': ['data/glade/*.glade', 'data/ui/*.ui', 'data/icons/*.svg'],

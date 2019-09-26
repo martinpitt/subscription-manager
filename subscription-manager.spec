@@ -65,6 +65,12 @@
 %global use_inotify 0
 %endif
 
+%if 0%{?suse_version}
+%global use_initial_setup 0
+%global use_firstboot 0
+%global use_subman_gui 0
+%endif
+
 %if (%{use_subman_gui} || %{use_initial_setup} || %{use_firstboot}) && !0%{?suse_version}
 %global use_rhsm_gtk 1
 %else

@@ -290,7 +290,6 @@ endif
 ifeq ($(INSTALL_INITIAL_SETUP),true)
 install-initial-setup:
 	$(info Installing initial-setup to $(INITIAL_SETUP_INST_DIR))
-	install -m 644 $(CONTENT_PLUGINS_SRC_DIR)/ostree_content.py $(DESTDIR)/$(RHSM_PLUGIN_DIR)
 	install -d $(DESTDIR)/$(ANACONDA_ADDON_INST_DIR)
 	install -d $(DESTDIR)/$(INITIAL_SETUP_INST_DIR)/gui/spokes
 	install -d $(DESTDIR)/$(INITIAL_SETUP_INST_DIR)/{categories,ks}

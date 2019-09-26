@@ -216,7 +216,6 @@ Requires:  %{py_package_prefix}-iniparse
 Requires:  %{py_package_prefix}-decorator
 BuildRequires:  %{py_package_prefix}-ethtool
 BuildRequires:  %{py_package_prefix}-iniparse
-BuildRequires:  %{py_package_prefix}-decorator
 Requires:  virt-what
 %if 0%{?suse_version}
 Requires:  logrotate

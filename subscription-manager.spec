@@ -128,6 +128,7 @@
 
 %if 0%{?suse_version}
 %global install_zypper_plugins INSTALL_ZYPPER_PLUGINS=true
+%global post_boot_tool INSTALL_INITIAL_SETUP=false INSTALL_FIRSTBOOT=false
 %else
 %global install_zypper_plugins INSTALL_ZYPPER_PLUGINS=false
 %endif

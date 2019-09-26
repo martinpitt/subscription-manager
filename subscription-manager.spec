@@ -1113,7 +1113,6 @@ find %{buildroot} -name \*.py -exec touch -r %{SOURCE0} '{}' \;
 
 # Copying Red Hat CA cert into each directory:
 %attr(755,root,root) %dir %{_sysconfdir}/docker/certs.d/cdn.redhat.com
-%attr(644,root,root) %{_sysconfdir}/rhsm/ca/redhat-entitlement-authority.pem
 %attr(644,root,root) %{_sysconfdir}/docker/certs.d/cdn.redhat.com/redhat-entitlement-authority.crt
 %endif
 
@@ -1169,6 +1168,7 @@ find %{buildroot} -name \*.py -exec touch -r %{SOURCE0} '{}' \;
 %attr(755,root,root) %dir %{_sysconfdir}/rhsm
 %attr(755,root,root) %dir %{_sysconfdir}/rhsm/ca
 
+%attr(644,root,root) %{_sysconfdir}/rhsm/ca/redhat-entitlement-authority.pem
 %attr(644,root,root) %{_sysconfdir}/rhsm/ca/redhat-uep.pem
 
 %if %use_cockpit

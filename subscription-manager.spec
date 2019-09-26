@@ -222,8 +222,10 @@ Requires:  cron
 Requires:  %{rhsm_package_name} = %{version}
 Requires:  %{py_package_prefix}-six
 %if 0%{?suse_version} >= 1500
+BuildRequires:  %{py_package_prefix}-python-dateutil
 Requires:  %{py_package_prefix}-python-dateutil
 %else
+BuildRequires: %{py_package_prefix}-dateutil
 Requires: %{py_package_prefix}-dateutil
 %endif
 Requires: %{py_package_prefix}-syspurpose

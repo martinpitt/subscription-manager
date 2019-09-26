@@ -215,8 +215,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:  %{py_package_prefix}-ethtool
 Requires:  %{py_package_prefix}-iniparse
 Requires:  %{py_package_prefix}-decorator
-BuildRequires:  %{py_package_prefix}-ethtool
-BuildRequires:  %{py_package_prefix}-iniparse
 Requires:  virt-what
 %if 0%{?suse_version}
 Requires:  logrotate

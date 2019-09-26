@@ -69,6 +69,7 @@
 %global use_initial_setup 0
 %global use_firstboot 0
 %global use_subman_gui 0
+%global use_container_plugin 0
 %endif
 
 %if (%{use_subman_gui} || %{use_initial_setup} || %{use_firstboot}) && !0%{?suse_version}
@@ -1237,9 +1238,11 @@ scrollkeeper-update -q -o %{_datadir}/omf/%{name} || :
 %endif
 %endif
 
+%if !0%{?suse_version}
 %if %{use_container_plugin}
 %post -n subscription-manager-plugin-container
 %{__python} %{rhsm_plugins_dir}/container_content.py || :
+%endif
 %endif
 
 %preun

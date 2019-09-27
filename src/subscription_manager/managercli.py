@@ -2415,8 +2415,10 @@ class ConfigCommand(CliCommand):
         for s in list(conf.keys()):
             section = conf[s]
             for name, _value in list(section.items()):
-                self.parser.add_option("--" + s + "." + name, dest=(s + "." + name),
-                    help=_("Section: %s, Name: %s") % (s, name))
+                # Allow adding CLI options only for sections and names listed in defaults
+                if s in rhsm.config.DEFAULTS and name in rhsm.config.DEFAULTS[s]:
+                    self.parser.add_option("--" + s + "." + name, dest=(s + "." + name),
+                                           help=_("Section: %s, Name: %s") % (s, name))
 
     def _validate_options(self):
         if self.options.list:
@@ -2427,9 +2429,13 @@ class ConfigCommand(CliCommand):
                 for s in list(conf.keys()):
                     section = conf[s]
                     for name, _value in list(section.items()):
-                        if getattr(self.options, s + "." + name):
-                            too_many = True
-                            break
+                        try:
+                            if getattr(self.options, s + "." + name):
+                                too_many = True
+                                break
+                        except AttributeError:
+                            # Ignore sections and names that are not supported by subscription-manager
+                            pass
             if too_many:
                 system_exit(os.EX_USAGE, _("Error: --list should not be used with any other options for setting or removing configurations."))
 
@@ -2446,7 +2452,7 @@ class ConfigCommand(CliCommand):
 
         if self.options.remove:
             for r in self.options.remove:
-                if not "." in r:  # pragma: noqa
+                if "." not in r:
                     system_exit(os.EX_USAGE, _("Error: configuration entry designation for removal must be of format [section.name]"))
 
                 section = r.split('.')[0]

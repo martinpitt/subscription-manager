@@ -168,7 +168,7 @@
 
 %global subpackages SUBPACKAGES="%{?include_syspurpose:syspurpose}"
 
-%global exclude_packages EXCLUDE_PACKAGES="subscription_manager.gui,*.plugin,"
+%global exclude_packages EXCLUDE_PACKAGES="subscription_manager.gui,*.plugin.container,"
 
 Name: subscription-manager
 Version: 1.26.2
@@ -1115,7 +1115,7 @@ find %{buildroot} -name \*.py -exec touch -r %{SOURCE0} '{}' \;
 %if %{with python3}
 %{rhsm_plugins_dir}/__pycache__
 %endif
-%{python_sitearch}/subscription_manager/plugin/container.py*
+%{python_sitearch}/subscription_manager/plugin/container/*.py*
 
 # Copying Red Hat CA cert into each directory:
 %attr(755,root,root) %dir %{_sysconfdir}/docker/certs.d/cdn.redhat.com

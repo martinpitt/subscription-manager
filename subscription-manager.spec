@@ -168,7 +168,7 @@
 
 %global subpackages SUBPACKAGES="%{?include_syspurpose:syspurpose}"
 
-%global exclude_packages EXCLUDE_PACKAGES="subscription_manager.gui,*.plugin.container,"
+%global exclude_packages EXCLUDE_PACKAGES="%{!use_subman_gui:subscription_manager.gui,}%{!use_container_plugin:*.plugin.container,}"
 
 Name: subscription-manager
 Version: 1.26.2

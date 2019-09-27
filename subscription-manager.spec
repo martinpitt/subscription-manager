@@ -167,8 +167,17 @@
 %endif
 
 %global subpackages SUBPACKAGES="%{?include_syspurpose:syspurpose}"
+%global exclude_packages EXCLUDE_PACKAGES="
 
-%global exclude_packages EXCLUDE_PACKAGES="%{!use_subman_gui:subscription_manager.gui,}%{!use_container_plugin:*.plugin.container,}"
+%if !%{use_rhsm_gtk}
+%global exclude_packages %{exclude_packages}subscription_manager.gui,
+%endif
+
+%if !%{use_container_plugin}
+%global exclude_packages %{exclude_packages}*.plugin.container,}
+%endif
+
+%global exclude_packages %{exclude_packages}"
 
 Name: subscription-manager
 Version: 1.26.2

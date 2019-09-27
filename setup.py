@@ -44,6 +44,7 @@ from build_ext import i18n, lint, template, utils
 exclude_packages = [x.strip() for x in os.environ.get('EXCLUDE_PACKAGES', '').split(',') if x != '']
 exclude_packages.extend(['subscription_manager.gui.firstboot.*', '*.ga_impls', '*.ga_impls.*', '*.plugin.ostree', '*.services.examples', 'syspurpose*'])
 
+print(exclude_packages)
 # subclass build_py so we can generate
 # version.py based on either args passed
 # in (--rpm-version, --gtk-version) or

@@ -125,6 +125,7 @@ build-subpackages:
 build: rhsmcertd rhsm-icon build-subpackages
 # Install doesn't perform a build if it doesn't have too.  Best to clean out
 # any cruft so developers don't end up install old builds.
+	export EXCLUDE_PACKAGES="$(EXCLUDE_PACKAGES)"
 	$(PYTHON) ./setup.py clean --all
 	$(PYTHON) ./setup.py build --quiet --gtk-version=$(GTK_VERSION) --rpm-version=$(VERSION)
 
@@ -309,6 +310,7 @@ install-post-boot: install-firstboot install-initial-setup
 
 .PHONY: install-via-setup
 install-via-setup: install-subpackages-via-setup
+	export EXCLUDE_PACKAGES="$(EXCLUDE_PACKAGES)"
 	$(PYTHON) ./setup.py install --root $(DESTDIR) --gtk-version=$(GTK_VERSION) --rpm-version=$(VERSION) --prefix=$(PREFIX) \
 	--with-systemd=$(WITH_SYSTEMD) --with-subman-gui=${WITH_SUBMAN_GUI} --with-cockpit-desktop-entry=${WITH_COCKPIT} \
 	$(SETUP_PY_INSTALL_PARAMS)

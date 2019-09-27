@@ -168,7 +168,7 @@
 
 %global subpackages SUBPACKAGES="%{?include_syspurpose:syspurpose}"
 
-%global exclude_packages EXCLUDE_PACKAGES="%{!?use_rhsm_gtk:subscription_manager.gui,}%{!?use_container_plugin:*container*,}"
+%global exclude_packages EXCLUDE_PACKAGES="subscription_manager.gui,*.plugin,"
 
 Name: subscription-manager
 Version: 1.26.2
@@ -635,7 +635,8 @@ Subscription Manager Cockpit UI
 %build
 make -f Makefile VERSION=%{version}-%{release} CFLAGS="%{optflags}" \
     LDFLAGS="%{__global_ldflags}" OS_DIST="%{dist}" PYTHON="%{__python}" \
-    %{?gtk_version} %{?subpackages} %{?include_syspurpose:INCLUDE_SYSPURPOSE="1"}
+    %{?gtk_version} %{?subpackages} %{?include_syspurpose:INCLUDE_SYSPURPOSE="1"} \
+    %{exclude_packages}
 
 %if %{with python2_rhsm}
 python2 ./setup.py build --quiet --gtk-version=%{?gtk3:3}%{?!gtk3:2} --rpm-version=%{version}-%{release}

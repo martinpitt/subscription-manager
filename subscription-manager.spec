@@ -325,7 +325,7 @@ BuildRequires: libzypp
 %if %use_systemd
 # We need the systemd RPM macros
 %if 0%{?suse_version} >= 1210
-BuildRequires: systemd-rpm-macros
+BuildRequires: systemd-rpm-macros >= 2.1-4.1
 %endif
 BuildRequires: systemd
 %endif
